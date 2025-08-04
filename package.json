@@ -2,7 +2,7 @@
   "name": "dashboard-portal",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://akshat-prog-mis.github.io/dashboard-portal",
+  "homepage": "https://akshat-prog-mis.github.io/company_dashboard",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
