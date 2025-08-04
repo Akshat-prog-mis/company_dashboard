@@ -2,45 +2,23 @@
 
 import React from 'react';
 import RippleEffectButton from '../shared/RippleEffectButton';
-import { companyStats, companyCards } from '../utils/constants';
+import { User } from 'lucide-react';
+import { companyCards } from '../utils/constants';
 
 const CompanyDashboard = ({ darkMode }) => {
   return (
     <div className="animate-fadeIn">
-      {/* Company Header */}
-      <div className={`relative overflow-hidden rounded-2xl mb-8 ${darkMode ? 'bg-gradient-to-br from-gray-800 to-gray-900' : 'bg-gradient-to-br from-blue-600 to-purple-700'}`}>
-        {/* Grid Pattern Overlay */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="w-full h-full" style={{
-            backgroundImage: `url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><pattern id='grid' width='10' height='10' patternUnits='userSpaceOnUse'><path d='M 10 0 L 0 0 0 10' fill='none' stroke='rgba(255,255,255,0.1)' stroke-width='0.5'/></pattern></defs><rect width='100' height='100' fill='url(%23grid)'/></svg>")`
-          }}></div>
-        </div>
-        
-        <div className="relative z-10 text-center py-12 px-8">
-          {/* Company Logo */}
-          <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-full flex items-center justify-center shadow-lg">
-            <span className="text-2xl font-bold text-white">TT</span>
+      {/* Header */}
+      <div className={`rounded-2xl mb-8 p-8 ${darkMode ? 'bg-gradient-to-br from-green-800 to-emerald-900' : 'bg-gradient-to-br from-green-500 to-emerald-600'}`}>
+        <div className="flex items-center space-x-4">
+          <div className="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+            <User className="w-8 h-8 text-white" />
           </div>
-          
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
-            Truetone Print System Private Limited
-          </h1>
-          <p className="text-xl text-white opacity-90">IMS Dashboard Portal</p>
-        </div>
-      </div>
-
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        {companyStats.map((stat, index) => (
-          <div
-            key={index}
-            className={`text-center p-6 rounded-xl shadow-lg animate-slideUp ${darkMode ? 'bg-gradient-to-br from-blue-800 to-purple-800' : 'bg-gradient-to-br from-blue-500 to-purple-600'}`}
-            style={{ animationDelay: stat.delay }}
-          >
-            <div className="text-2xl md:text-3xl font-bold text-white mb-2">{stat.number}</div>
-            <div className="text-white opacity-90">{stat.label}</div>
+          <div>
+            <h1 className="text-3xl font-bold text-white">Brijesh Kumar Dashboard</h1>
+            <p className="text-white opacity-90">IMS Portal</p>
           </div>
-        ))}
+        </div>
       </div>
 
       {/* Main Cards Grid */}
@@ -73,12 +51,6 @@ const CompanyDashboard = ({ darkMode }) => {
         ))}
       </div>
 
-      {/* Footer */}
-      <div className={`mt-12 text-center py-8 px-6 rounded-xl ${darkMode ? 'bg-gray-800' : 'bg-gray-50'} border-t ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
-        <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-          © 2025 Truetone Print System Private Limited. All rights reserved. | Inventory Management System
-        </p>
-      </div>
     </div>
   );
 };

@@ -100,7 +100,7 @@ const DashboardPortal = () => {
 
   // Main dashboard view
   return (
-    <div className={`min-h-screen p-4 animate-fadeIn transition-colors duration-500 ${darkMode ? 'bg-gradient-to-br from-gray-900 to-gray-800' : 'bg-gradient-to-br from-gray-50 to-gray-100'}`}>
+    <div className={`min-h-screen p-3 animate-fadeIn transition-colors duration-500 ${darkMode ? 'bg-gradient-to-br from-gray-900 to-gray-800' : 'bg-gradient-to-br from-gray-50 to-gray-100'}`}>
       <div className="max-w-7xl mx-auto">
         <Header 
           darkMode={darkMode}

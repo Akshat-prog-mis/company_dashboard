@@ -2,7 +2,7 @@
   "name": "dashboard-portal",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://yourusername.github.io/dashboard-portal",
+  "homepage": "https://Akshat-prog-mis.github.io/dashboard-portal",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",

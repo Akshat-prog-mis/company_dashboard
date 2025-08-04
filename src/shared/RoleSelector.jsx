@@ -62,7 +62,7 @@ const RoleSelector = ({ darkMode, toggleDarkMode, handleRoleSelect }) => {
           <p className={`text-xl ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>Choose your role to continue</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols- gap-6">
           {roles.map((role, index) => {
             const IconComponent = iconMap[role.icon];
             return (

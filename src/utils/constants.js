@@ -102,16 +102,9 @@ export const smitaLinks = [
   }
 ];
 
-export const companyStats = [
-  { number: "24/7", label: "System Access", delay: "0.1s" },
-  { number: "100%", label: "Data Accuracy", delay: "0.2s" },
-  { number: "Real-Time", label: "Updates", delay: "0.3s" }
-];
-
 export const companyCards = [
   {
     title: "Material IN/OUT Form",
-    description: "Submit material entry and exit requests. Track inventory movements and maintain accurate records.",
     url: "https://forms.gle/M5xuNYgtGuQWC9628",
     icon: "📝",
     gradient: "from-red-400 to-orange-500",
@@ -120,7 +113,6 @@ export const companyCards = [
   },
   {
     title: "IMS Dashboard",
-    description: "View comprehensive analytics and reports. Monitor inventory levels and track performance metrics.",
     url: "https://lookerstudio.google.com/reporting/b2aa4d62-1bc0-4797-ad54-5ab8c85cddd0",
     icon: "📊",
     gradient: "from-blue-400 to-blue-600",
@@ -129,7 +121,6 @@ export const companyCards = [
   },
   {
     title: "Material Required Sheet",
-    description: "Access and manage material requirements. Plan inventory needs and track procurement status.",
     url: "https://tinyurl.com/nmkj8fwd",
     icon: "📋",
     gradient: "from-green-400 to-blue-500",
