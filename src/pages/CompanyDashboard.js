@@ -1,4 +1,4 @@
-// /src/components/Dashboards/CompanyDashboard.jsx
+//components/CompanyDashboard.jsx
 
 import React from 'react';
 import RippleEffectButton from '../shared/RippleEffectButton';

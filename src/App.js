@@ -1,10 +1,11 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import DashboardPortal from './components/DashboardPortal';
 import CompanyDashboard from './pages/CompanyDashboard';
 import SmitaDashboard from './pages/SmitaDashboard';
 import User3Dashboard from './pages/User3Dashboard';
 import './App.css';
+
 
 function App() {
   return (
