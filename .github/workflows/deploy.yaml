@@ -1,0 +1,145 @@
+name: 🚀 Deploy React App to GitHub Pages
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: 20
+  FORCE_COLOR: 1
+  CI: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🔍 Verify repository structure
+        run: |
+          echo "📁 Repository contents:"
+          ls -la
+          echo "📋 Checking required files..."
+          if [ ! -f "package.json" ]; then
+            echo "❌ package.json not found!"
+            exit 1
+          fi
+          if [ ! -f "package-lock.json" ]; then
+            echo "⚠️  package-lock.json not found, will use npm install instead of ci"
+          fi
+          echo "✅ Repository structure verified"
+
+      - name: ⚙️ Setup Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: package-lock.json
+        
+      - name: 🧹 Clear npm cache
+        run: npm cache clean --force
+
+      - name: 📦 Install dependencies
+        run: |
+          echo "📦 Installing dependencies..."
+          if [ -f "package-lock.json" ]; then
+            npm ci --prefer-offline --no-audit
+          else
+            npm install --prefer-offline --no-audit
+          fi
+          echo "✅ Dependencies installed successfully"
+        timeout-minutes: 5
+
+      - name: 🔍 Verify build script exists
+        run: |
+          if ! npm run build --dry-run > /dev/null 2>&1; then
+            echo "❌ Build script not found in package.json"
+            echo "📋 Available scripts:"
+            npm run
+            exit 1
+          fi
+          echo "✅ Build script verified"
+
+      - name: 🏗️ Build application
+        run: |
+          echo "🏗️ Building React application..."
+          npm run build
+          echo "✅ Build completed successfully"
+        env:
+          CI: false
+          NODE_ENV: production
+        timeout-minutes: 8
+
+      - name: 🔍 Verify build output
+        run: |
+          if [ ! -d "build" ]; then
+            echo "❌ Build directory not found!"
+            echo "📁 Current directory contents:"
+            ls -la
+            exit 1
+          fi
+          if [ ! -f "build/index.html" ]; then
+            echo "❌ index.html not found in build directory!"
+            echo "📁 Build directory contents:"
+            ls -la build/
+            exit 1
+          fi
+          echo "📊 Build statistics:"
+          du -sh build/
+          echo "📁 Build contents:"
+          ls -la build/
+          echo "✅ Build output verified"
+
+      - name: ⚙️ Configure GitHub Pages
+        uses: actions/configure-pages@v4
+
+      - name: 📤 Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build
+          name: github-pages
+          retention-days: 1
+
+      - name: 🚀 Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        timeout-minutes: 5
+
+      - name: 🎉 Deployment success
+        if: success()
+        run: |
+          echo "🎉 Deployment successful!"
+          echo "🌐 Your site is available at: ${{ steps.deployment.outputs.page_url }}"
+          echo "⏰ Deployed at: $(date)"
+
+      - name: ❌ Deployment failure debug
+        if: failure()
+        run: |
+          echo "❌ Deployment failed!"
+          echo "🔍 Debugging information:"
+          echo "📁 Current directory:"
+          ls -la
+          if [ -d "build" ]; then
+            echo "📁 Build directory exists:"
+            ls -la build/
+          else
+            echo "❌ Build directory missing"
+          fi
+          echo "💾 Available space:"
+          df -h
+          echo "🧠 Memory usage:"
+          free -h
