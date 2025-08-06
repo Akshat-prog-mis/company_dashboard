@@ -1,177 +1,159 @@
-// /src/DashboardPortal.jsx (Main App)
-
 import React, { useState, useEffect } from 'react';
-
-// Import shared components
 import Header from '../shared/Header';
-import RoleSelector from '../shared/RoleSelector';
 import { LoadingScreen, TransitionLoader } from '../shared/Loader';
-
-// Import dashboard components
 import CompanyDashboard from '../pages/CompanyDashboard';
 import SmitaDashboard from '../pages/SmitaDashboard';
 import User3Dashboard from '../pages/User3Dashboard';
 
+const USERS = {
+  brijesh: {
+    name: 'Brijesh Kumar',
+    password: '123456789',
+    dashboard: CompanyDashboard,
+    page: '/company-dashboard'
+  },
+  deepika: {
+    name: 'Deepika Singh',
+    password: 'deepika@123',
+    dashboard: User3Dashboard,
+    page: '/user3-dashboard'
+  },
+  smita: {
+    name: 'Smita Patel',
+    password: 'smita@123',
+    dashboard: SmitaDashboard,
+    page: '/smita-dashboard'
+  }
+};
+
 const DashboardPortal = () => {
-  const [rememberedUser, setRememberedUser] = useState(null);
-  const [showRoleSelect, setShowRoleSelect] = useState(false);
+  // States
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true');
+  const [loggedInUser, setLoggedInUser] = useState(localStorage.getItem('loggedInUser'));
   const [isLoading, setIsLoading] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(localStorage.getItem('darkMode') === 'true');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
+  // Effects
   useEffect(() => {
-    // Load dark mode preference
-    const savedDarkMode = localStorage.getItem('darkMode') === 'true';
-    setDarkMode(savedDarkMode);
-
-    // Simulate initial loading
     const timer = setTimeout(() => {
-      const user = localStorage.getItem('rememberedUser');
-      if (user) {
-        setRememberedUser(user);
-      } else {
-        setShowRoleSelect(true);
-      }
       setIsLoading(false);
     }, 1500);
-
     return () => clearTimeout(timer);
   }, []);
 
+  // Handlers
   const toggleDarkMode = () => {
     const newDarkMode = !darkMode;
     setDarkMode(newDarkMode);
     localStorage.setItem('darkMode', newDarkMode.toString());
   };
 
-  const handleRoleSelect = (role) => {
+  const handleLogin = (e) => {
+    e.preventDefault();
     setIsTransitioning(true);
-    
-    setTimeout(() => {
-      localStorage.setItem('rememberedUser', role);
-      setRememberedUser(role);
-      setShowRoleSelect(false);
-      setIsTransitioning(false);
-    }, 800);
+
+    // Simple validation (replace with your actual passwords)
+    if (USERS[username]?.password === password) {
+      localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('loggedInUser', username);
+      setIsLoggedIn(true);
+      setLoggedInUser(username);
+      setError('');
+    } else {
+      setError('Invalid credentials');
+    }
+
+    setIsTransitioning(false);
   };
 
-  const handleSwitchUser = () => {
+  const handleLogout = () => {
     setIsTransitioning(true);
-    
     setTimeout(() => {
-      localStorage.removeItem('rememberedUser');
-      setRememberedUser(null);
-      setShowRoleSelect(true);
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('loggedInUser');
+      setIsLoggedIn(false);
+      setLoggedInUser(null);
       setIsTransitioning(false);
     }, 500);
   };
 
-  const renderDashboard = () => {
-    switch (rememberedUser) {
-      case 'Brijesh Kumar':
-        return <CompanyDashboard darkMode={darkMode} />;
-      case 'Smita Patel':
-        return <SmitaDashboard darkMode={darkMode} />;
-      default:
-        return <User3Dashboard darkMode={darkMode} />;
-    }
-  };
+  // Loading States
+  if (isLoading) return <LoadingScreen darkMode={darkMode} />;
+  if (isTransitioning) return <TransitionLoader darkMode={darkMode} />;
 
-  // Loading screen
-  if (isLoading) {
-    return <LoadingScreen darkMode={darkMode} />;
-  }
-
-  // Transition loading
-  if (isTransitioning) {
-    return <TransitionLoader darkMode={darkMode} />;
-  }
-
-  // Role selection screen
-  if (showRoleSelect) {
+  // Login Form
+  if (!isLoggedIn) {
     return (
-      <RoleSelector 
-        darkMode={darkMode} 
-        toggleDarkMode={toggleDarkMode}
-        handleRoleSelect={handleRoleSelect}
-      />
+      <div className={`min-h-screen flex items-center justify-center animate-fadeIn ${darkMode ? 'bg-gray-900' : 'bg-indigo-50'}`}>
+        <form
+          onSubmit={handleLogin}
+          className={`p-8 rounded-xl shadow-lg w-full max-w-sm animate-slideUp ${darkMode ? 'bg-gray-800' : 'bg-white'}`}
+        >
+          <h2 className={`text-2xl font-bold mb-6 text-center ${darkMode ? 'text-white' : 'text-gray-800'}`}>
+            Dashboard Login
+          </h2>
+          
+          {error && <div className="mb-4 text-red-500 text-center">{error}</div>}
+          
+          <input
+            className="w-full mb-4 p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+            autoFocus
+          />
+          
+          <input
+            className="w-full mb-6 p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+          />
+          
+          <button
+            type="submit"
+            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded transition"
+          >
+            Login
+          </button>
+
+          <div className="mt-4">
+            <button
+              type="button"
+              onClick={toggleDarkMode}
+              className={`w-full py-2 rounded ${darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-800'}`}
+            >
+              {darkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
+            </button>
+          </div>
+        </form>
+      </div>
     );
   }
 
-  // Main dashboard view
+  // Dashboard View
+  const UserDashboard = USERS[loggedInUser]?.dashboard;
+  
   return (
     <div className={`min-h-screen p-3 animate-fadeIn transition-colors duration-500 ${darkMode ? 'bg-gradient-to-br from-gray-900 to-gray-800' : 'bg-gradient-to-br from-gray-50 to-gray-100'}`}>
       <div className="max-w-7xl mx-auto">
         <Header 
           darkMode={darkMode}
           toggleDarkMode={toggleDarkMode}
-          rememberedUser={rememberedUser}
-          handleSwitchUser={handleSwitchUser}
+          rememberedUser={USERS[loggedInUser]?.name}
+          handleSwitchUser={handleLogout}
         />
 
-        {/* Dashboard Content */}
         <div className="animate-fadeIn">
-          {renderDashboard()}
+          {UserDashboard && <UserDashboard darkMode={darkMode} onLogout={handleLogout} />}
         </div>
       </div>
-
-      {/* Custom CSS Animations */}
-      <style>{`
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        
-        @keyframes slideUp {
-          from { 
-            opacity: 0; 
-            transform: translateY(30px); 
-          }
-          to { 
-            opacity: 1; 
-            transform: translateY(0); 
-          }
-        }
-        
-        @keyframes slideDown {
-          from { 
-            opacity: 0; 
-            transform: translateY(-30px); 
-          }
-          to { 
-            opacity: 1; 
-            transform: translateY(0); 
-          }
-        }
-        
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
-        }
-        
-        @keyframes ripple {
-          to {
-            transform: scale(4);
-            opacity: 0;
-          }
-        }
-        
-        .animate-fadeIn {
-          animation: fadeIn 0.6s ease-out;
-        }
-        
-        .animate-slideUp {
-          animation: slideUp 0.6s ease-out both;
-        }
-        
-        .animate-slideDown {
-          animation: slideDown 0.6s ease-out;
-        }
-        
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-      `}</style>
     </div>
   );
 };

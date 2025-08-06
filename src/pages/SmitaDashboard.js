@@ -5,7 +5,7 @@ import { Shield } from 'lucide-react';
 import RippleEffectButton from '../shared/RippleEffectButton';
 import { smitaLinks } from '../utils/constants';
 
-const SmitaDashboard = ({ darkMode }) => {
+const SmitaDashboard = ({ darkMode ,onLogout }) => {
   return (
     <div className="animate-fadeIn">
       {/* Header */}
@@ -47,6 +47,13 @@ const SmitaDashboard = ({ darkMode }) => {
           </div>
         ))}
       </div>
+
+      <button
+        onClick={onLogout}
+        className="ml-auto bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold"
+      >
+        Logout
+      </button>
     </div>
   );
 };

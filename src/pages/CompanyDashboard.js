@@ -5,7 +5,7 @@ import RippleEffectButton from '../shared/RippleEffectButton';
 import { User } from 'lucide-react';
 import { companyCards } from '../utils/constants';
 
-const CompanyDashboard = ({ darkMode }) => {
+const CompanyDashboard = ({ darkMode ,onLogout }) => {
   return (
     <div className="animate-fadeIn">
       {/* Header */}
@@ -50,6 +50,13 @@ const CompanyDashboard = ({ darkMode }) => {
           </div>
         ))}
       </div>
+
+      <button
+        onClick={onLogout}
+        className="ml-auto bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold"
+      >
+        Logout
+      </button>
 
     </div>
   );
