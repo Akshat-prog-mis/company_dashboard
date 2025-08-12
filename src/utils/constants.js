@@ -2,7 +2,7 @@
 
 export const roles = [
   { 
-    name: 'Brijesh Kumar', 
+    name: 'brajesh Kumar', 
     icon: 'Building2', 
     color: 'blue', 
     bgGradient: 'from-blue-400 to-blue-600', 
@@ -124,6 +124,14 @@ export const companyCards = [
     url: "https://tinyurl.com/nmkj8fwd",
     icon: "📋",
     gradient: "from-green-400 to-blue-500",
+    buttonText: "Open Sheet",
+    delay: "0.3s"
+  },
+  {
+    title: "Directory",
+    url: " https://docs.google.com/spreadsheets/d/1_ouTc2veJ-FoW90_m-FXHe8dMN30X_yTtKq1-pAiBRQ/edit?usp=sharing* ",
+    icon: "📋",
+    gradient: "from-red-400 to-blue-500",
     buttonText: "Open Sheet",
     delay: "0.3s"
   }
