@@ -19,7 +19,7 @@ const DashboardPortal = () => {
   // Check session validity periodically
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 1500);
-    
+        
     const sessionCheck = setInterval(() => {
       if (isLoggedIn && !authUtils.isSessionValid()) {
         handleLogout();
@@ -87,7 +87,11 @@ const DashboardPortal = () => {
   }
 
   const UserDashboard = USERS[loggedInUser]?.dashboard;
+  const userInfo = USERS[loggedInUser];
   
+  // Check if this is a company dashboard (you can customize this logic based on your user types)
+  const isCompanyDashboard = loggedInUser === 'Brajesh Kumar' || userInfo?.type === 'company';
+
   return (
     <div className={`min-h-screen p-3 animate-fadeIn transition-colors duration-500 ${
       darkMode ? 'bg-gradient-to-br from-gray-900 to-gray-800' : 'bg-gradient-to-br from-gray-50 to-gray-100'
@@ -96,8 +100,13 @@ const DashboardPortal = () => {
         <Header 
           darkMode={darkMode}
           toggleDarkMode={toggleDarkMode}
-          rememberedUser={USERS[loggedInUser]?.name}
+          rememberedUser={userInfo?.name || loggedInUser}
           handleSwitchUser={handleLogout}
+          // Enhanced props for company dashboard
+          showCompanyHeader={isCompanyDashboard}
+          companyTitle={isCompanyDashboard ? `${userInfo?.name || loggedInUser} Dashboard` : undefined}
+          companySubtitle={isCompanyDashboard ? "IMS Portal" : undefined}
+          companyGradient={isCompanyDashboard ? (darkMode ? 'bg-gradient-to-br from-green-800 to-emerald-900' : 'bg-gradient-to-br from-green-500 to-emerald-600') : undefined}
         />
         <div className="animate-fadeIn">
           {UserDashboard && <UserDashboard darkMode={darkMode} onLogout={handleLogout} />}

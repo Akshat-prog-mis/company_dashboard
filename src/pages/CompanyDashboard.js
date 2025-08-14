@@ -1,26 +1,11 @@
 //components/CompanyDashboard.jsx
-
 import React from 'react';
 import RippleEffectButton from '../shared/RippleEffectButton';
-import { User } from 'lucide-react';
 import { companyCards } from '../utils/constants';
 
-const CompanyDashboard = ({ darkMode ,onLogout }) => {
+const CompanyDashboard = ({ darkMode, onLogout }) => {
   return (
-    <div className="animate-fadeIn">
-      {/* Header */}
-      <div className={`rounded-2xl mb-8 p-8 ${darkMode ? 'bg-gradient-to-br from-green-800 to-emerald-900' : 'bg-gradient-to-br from-green-500 to-emerald-600'}`}>
-        <div className="flex items-center space-x-4">
-          <div className="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
-            <User className="w-8 h-8 text-white" />
-          </div>
-          <div>
-            <h1 className="text-3xl font-bold text-white">Brajesh Kumar Dashboard</h1>
-            <p className="text-white opacity-90">IMS Portal</p>
-          </div>
-        </div>
-      </div>
-
+    <div className="animate-fadeIn space-y-8">
       {/* Main Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {companyCards.map((card, index) => (
@@ -51,13 +36,15 @@ const CompanyDashboard = ({ darkMode ,onLogout }) => {
         ))}
       </div>
 
-      <button
-        onClick={onLogout}
-        className="ml-auto bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold"
-      >
-        Logout
-      </button>
-
+      {/* Logout Button - Optional: You might want to remove this too since header has Switch User */}
+      <div className="flex justify-end">
+        <button
+          onClick={onLogout}
+          className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-300"
+        >
+          Logout
+        </button>
+      </div>
     </div>
   );
 };

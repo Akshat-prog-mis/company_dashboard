@@ -8,18 +8,6 @@ import { smitaLinks } from '../utils/constants';
 const SmitaDashboard = ({ darkMode ,onLogout }) => {
   return (
     <div className="animate-fadeIn">
-      {/* Header */}
-      <div className={`rounded-2xl mb-8 p-8 ${darkMode ? 'bg-gradient-to-br from-red-800 to-red-900' : 'bg-gradient-to-br from-red-500 to-red-600'}`}>
-        <div className="flex items-center space-x-4">
-          <div className="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
-            <Shield className="w-8 h-8 text-white" />
-          </div>
-          <div>
-            <h1 className="text-3xl font-bold text-white">Smita Patel Dashboard</h1>
-            <p className="text-white opacity-90">Operations Portal</p>
-          </div>
-        </div>
-      </div>
 
       {/* Links Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">

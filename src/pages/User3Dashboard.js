@@ -9,17 +9,6 @@ const DeepikaDashboard = ({ darkMode ,onLogout }) => {
   return (
     <div className="animate-fadeIn">
       {/* Header */}
-      <div className={`rounded-2xl mb-8 p-8 ${darkMode ? 'bg-gradient-to-br from-green-800 to-emerald-900' : 'bg-gradient-to-br from-green-500 to-emerald-600'}`}>
-        <div className="flex items-center space-x-4">
-          <div className="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
-            <User className="w-8 h-8 text-white" />
-          </div>
-          <div>
-            <h1 className="text-3xl font-bold text-white">Deepika Singh Dashboard</h1>
-            <p className="text-white opacity-90">Management Portal</p>
-          </div>
-        </div>
-      </div>
 
       {/* Links Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
