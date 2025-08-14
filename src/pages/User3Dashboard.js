@@ -1,15 +1,12 @@
-// /src/components/Dashboards/SmitaDashboard.jsx (Deepika Singh Dashboard)
+// /src/components/Dashboards/DeepikaDashboard.jsx (Deepika Singh Dashboard)
 
 import React from 'react';
-import { User } from 'lucide-react';
 import RippleEffectButton from '../shared/RippleEffectButton';
 import { deepikaLinks } from '../utils/constants';
 
-const DeepikaDashboard = ({ darkMode ,onLogout }) => {
+const DeepikaDashboard = ({ darkMode, onLogout }) => {
   return (
-    <div className="animate-fadeIn">
-      {/* Header */}
-
+    <div className="animate-fadeIn space-y-8">
       {/* Links Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {deepikaLinks.map((link, index) => (
@@ -37,12 +34,15 @@ const DeepikaDashboard = ({ darkMode ,onLogout }) => {
         ))}
       </div>
 
-      <button
-        onClick={onLogout}
-        className="ml-auto bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold"
-      >
-        Logout
-      </button>
+      {/* Logout Button - Optional: You might want to remove this too since header handles user switching */}
+      <div className="flex justify-end">
+        <button
+          onClick={onLogout}
+          className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-300"
+        >
+          Logout
+        </button>
+      </div>
     </div>
   );
 };
