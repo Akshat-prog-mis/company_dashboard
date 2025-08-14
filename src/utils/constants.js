@@ -1,5 +1,3 @@
-// /src/utils/constants.js
-
 export const roles = [
   { 
     name: 'brajesh Kumar', 
@@ -84,6 +82,25 @@ export const deepikaLinks = [
     url: "https://drive.google.com/drive/folders/1mnDIM1eCHprafNotC2GoqzONmBCBuDGT?usp=drive_link", 
     icon: "🚗", 
     gradient: "from-cyan-400 to-cyan-600" 
+  },
+  // New Deepika Links
+  { 
+    title: "Maintenance Visit Form", 
+    url: "https://forms.gle/8zs7Kp6mwqYiqY2F9", 
+    icon: "🛠️", 
+    gradient: "from-green-400 to-green-600" 
+  },
+  { 
+    title: "Maintenance Visit (Responses)", 
+    url: "https://docs.google.com/spreadsheets/d/1F_pOWJF_noOur2TfdUwp2iQB7Dpfka3se0ygwUaF2S0/edit?usp=drive_link", 
+    icon: "📄", 
+    gradient: "from-blue-400 to-blue-600" 
+  },
+  { 
+    title: "Raw Material Pricing", 
+    url: "https://lookerstudio.google.com/reporting/20c25f0b-b772-40d1-acab-f632763a8816", 
+    icon: "💲", 
+    gradient: "from-yellow-400 to-yellow-600" 
   }
 ];
 
@@ -112,6 +129,15 @@ export const companyCards = [
     delay: "0.1s"
   },
   {
+    // New Brajesh Link after Material IN/OUT Form
+    title: "Material IN/OUT Viewer",
+    url: "https://docs.google.com/spreadsheets/d/1fU23PeY91GiLRqPpioxTzHRy-MWPQk2AjkTvgpX2BBQ/edit?usp=sharing",
+    icon: "📄",
+    gradient: "from-blue-400 to-blue-600",
+    buttonText: "View Sheet",
+    delay: "0.15s"
+  },
+  {
     title: "IMS Dashboard",
     url: "https://lookerstudio.google.com/reporting/b2aa4d62-1bc0-4797-ad54-5ab8c85cddd0",
     icon: "📊",
@@ -128,7 +154,15 @@ export const companyCards = [
     delay: "0.3s"
   },
   {
-    title: "Directory",
+    title: "Cylinder Received",
+    url: "https://forms.gle/URBtaFmv9ELVj1137",
+    icon: "🛢️",
+    gradient: "from-purple-400 to-purple-600",
+    buttonText: "Fill Form",
+    delay: "0.35s"
+  },
+  {
+    title: "Job Directory",
     url: " https://docs.google.com/spreadsheets/d/1_ouTc2veJ-FoW90_m-FXHe8dMN30X_yTtKq1-pAiBRQ/edit?usp=sharing* ",
     icon: "📋",
     gradient: "from-red-400 to-blue-500",
