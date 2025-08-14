@@ -30,7 +30,7 @@ export const deepikaLinks = [
     gradient: "from-purple-400 to-purple-600" 
   },
   { 
-    title: "TT - JS", 
+    title: "Job Sheet", 
     url: "https://docs.google.com/spreadsheets/d/1_ouTc2veJ-FoW90_m-FXHe8dMN30X_yTtKq1-pAiBRQ/edit?usp=drive_link", 
     icon: "📋", 
     gradient: "from-blue-400 to-blue-600" 
