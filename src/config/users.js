@@ -3,20 +3,20 @@ import SmitaDashboard from '../pages/SmitaDashboard';
 import User3Dashboard from '../pages/User3Dashboard';
 
 export const USERS = {
-  brijesh: {
-    name: 'Brajesh',
+  brajesh: {
+    name: 'Brajesh Kumar',
     password: '1234',
     dashboard: CompanyDashboard,
     page: '/company-dashboard'
   },
   deepika: {
-    name: 'Deepika',
+    name: 'Deepika Singh',
     password: '1234',
     dashboard: User3Dashboard,
     page: '/user3-dashboard'
   },
   smita: {
-    name: 'Smita',
+    name: 'Deepika Singh',
     password: '1234',
     dashboard: SmitaDashboard,
     page: '/smita-dashboard'
